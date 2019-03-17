@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="col-12">
+    <h1>Welcome to Task Tracker</h1>
+    <p><a class="btn btnView" href="/tasks">View Tasks</a>  <a class="btn btnView" href="/users">View Users</a> <br><br> 
+    <%= link "Add New Task", to: Routes.task_path(@conn, :new), class: 'btn btnNew'%>  <%= link "Register User", to: Routes.task_path(@conn, :new), class: 'btn btnNew' %> </p>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+/* This file is for your main application css. */
+$body-bg: salmon;
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+}
+.btnView {
+  background-color: purple;
+}
+.btnNew {
+  background-color: #3BC22A;
+}
+
+.topRow {
+  background-color: #1C45D6;
+}

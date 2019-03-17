@@ -1,0 +1,30 @@
+<h1>List of Users</h1>
+<p>This is the list of users that can be assigned to a task. Use the edit button to change the Name of the User. If you would like to add a new User you may use the button at the bottom of the table. You may also use the New Task button at the bottom to add a new task which can be assigned to any of these users.</p>
+<table class="table table-striped">
+  <thead class='topRow'>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.name %></td>
+
+      <td>
+        <%= link "Edit", to: Routes.user_path(@conn, :edit, user),
+            class: "btn btn-info" %>
+        <%= link "Show", to: Routes.user_path(@conn, :show, user),
+            class: "btn btn-outline-info" %>
+        <%= link "Delete", to: Routes.user_path(@conn, :delete, user),
+            method: :delete, data: [confirm: "Are you sure?"],
+            class: "btn btn-danger" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New User", to: Routes.user_path(@conn, :new), class: 'btn btnNew' %> <%= link "New Task", to: Routes.task_path(@conn, :new), class: 'btn btnNew' %></span>
