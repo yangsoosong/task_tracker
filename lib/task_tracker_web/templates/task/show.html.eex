@@ -23,6 +23,35 @@
   </li>
 
 </ul>
+<span><%= link "Edit Task", to: Routes.task_path(@conn, :edit, @task) %></span>
+<ul>
+</ul>
+<button id="start-timeblock" class= "btn btnNew">Start Tracking</button>
+<button id="stop-timeblock" class= "btn btnNew">Stop Tracking</button>
 
-<span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
+<h3>Time Blocks</h3>
+<table class="table table-striped">
+  <thead class='topRow'>
+    <tr>
+      <th>TimeBlock Id</th>
+      <th>Start</th>
+      <th>Stop</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for tb <- TaskTracker.Timeblocks.list_timeblocks_by_task(@task.id) do %>
+      <tr class="tb-edit">
+        <td><%= tb.id %></tb>
+        <td><input id="edit-start" type="text" class="form-control" value="<%= tb.start %>"</td>
+        <td><input id="edit-end" type="text" class="form-control" value="<%= tb.end %>"</td>
+        <td><button id="save-timeblock" data-tb-id="<%= tb.id %>">Save Update</button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  window.task_id = <%= @task.id  %>
+</script>
 <span><%= link "Back", to: Routes.task_path(@conn, :index) %></span>

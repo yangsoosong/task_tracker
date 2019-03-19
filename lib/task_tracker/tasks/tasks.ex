@@ -21,6 +21,31 @@ defmodule TaskTracker.Tasks do
     Repo.all(Task)
   end
 
+  def list_user_tasks(user_id) do
+    if user_id do
+      query = from t in Task,
+               where: t.user_id == ^user_id,
+               select: t
+      Repo.all(query)
+    else
+      []
+    end
+  end
+
+  def list_underling_tasks(manager_id) do
+    if manager_id do
+      underling_list_ids = Enum.map(TaskTracker.Users.list_users_by_manager(manager_id), fn u -> u.id end)
+
+      query = from t in Task,
+               where: t.user_id in ^underling_list_ids,
+               select: t
+      Repo.all(query)
+    else
+      []
+    end
+  end
+
+
   @doc """
   Gets a single task.
 
@@ -35,8 +60,12 @@ defmodule TaskTracker.Tasks do
       ** (Ecto.NoResultsError)
 
   """
-  def get_task!(id), do: Repo.get!(Task, id)
-
+  def get_task!(id) do
+     Repo.one! from t in Task,
+      where: t.id == ^id,
+      preload: [:timeblocks]
+  end
+  
   @doc """
   Creates a task.
 

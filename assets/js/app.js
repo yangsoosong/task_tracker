@@ -17,3 +17,51 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+//
+
+$(function () {
+  let start = null
+  let stop = null
+
+  $('#start-timeblock').click(() => {
+    start = new Date()
+  });
+
+  $('#stop-timeblock').click(() => {
+    stop = new Date()
+    $.ajax("/ajax/timeblocks", {
+      method: "post",
+      datatype: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({
+        timeblock: {
+          start: start,
+          end: stop,
+          task_id: window.task_id,
+        }
+      }),
+      success: (resp) => {location.reload()},
+    });
+  });
+
+  $('#save-timeblock').click((ev) => {
+    let id = $(ev.target).data("tb-id")
+    let row = $(ev.target).closest(".tb-edit")
+    let start_field = row.find("#edit-start")
+    let stop_field = row.find("#edit-end")
+    $.ajax("/ajax/timeblocks/"+id, {
+      method: "put",
+      datatype: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({
+        timeblock: {
+          start: $(start_field).val(),
+          end: $(stop_field).val(),
+          task_id: window.task_id,
+        }
+      }),
+      success: (resp) => {},
+      error: (resp) => {alert("An error occurred")}
+    });
+  });
+});

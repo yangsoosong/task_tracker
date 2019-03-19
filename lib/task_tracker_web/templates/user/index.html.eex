@@ -4,7 +4,7 @@
   <thead class='topRow'>
     <tr>
       <th>Name</th>
-
+      <th>Manager</th>
       <th></th>
     </tr>
   </thead>
@@ -12,7 +12,7 @@
 <%= for user <- @users do %>
     <tr>
       <td><%= user.name %></td>
-
+       <td><%= TaskTracker.Users.get_user(user.manager_id).name %></td>
       <td>
         <%= link "Edit", to: Routes.user_path(@conn, :edit, user),
             class: "btn btn-info" %>

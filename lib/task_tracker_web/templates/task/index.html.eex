@@ -12,7 +12,44 @@
     </tr>
   </thead>
   <tbody>
-<%= for task <- @tasks do %>
+
+<%= for task <- @user_tasks do %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.desc %></td>
+      <td><%= task.time %></td>
+      <td><%= task.complete %></td>
+      <td><%= TaskTracker.Users.get_user(task.user_id).name %></td>
+
+      <td>
+        <%= link "Edit", to: Routes.task_path(@conn, :edit, task),
+            class: "btn btn-info" %>
+        <%= link "Show", to: Routes.task_path(@conn, :show, task),
+            class: "btn btn-outline-info" %>
+        <%= link "Delete", to: Routes.task_path(@conn, :delete, task),
+            method: :delete, data: [confirm: "Proceed with delete?"],
+            class: "btn btn-danger" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<h3>Your  Tasks</h3>
+<table class="table table-striped">
+  <thead class='topRow'>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Time Taken</th>
+      <th>Completed</th>
+      <th>User Assigned</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for task <- @underling_tasks do %>
     <tr>
       <td><%= task.name %></td>
       <td><%= task.desc %></td>
@@ -22,7 +59,7 @@
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
         <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
-        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Proceed with delete?"] %>
       </td>
     </tr>
 <% end %>
