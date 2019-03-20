@@ -13,13 +13,13 @@
   </li>
 
   <li>
-    <strong>Time:</strong>
-    <%= @task.time %>
+    <strong>Complete:</strong>
+    <%= @task.complete %>
   </li>
 
   <li>
-    <strong>Complete:</strong>
-    <%= @task.complete %>
+    <strong>User Assigned:</strong>
+    <%= TaskTracker.Users.get_user(@task.user_id).name %>
   </li>
 
 </ul>
@@ -45,7 +45,7 @@
         <td><%= tb.id %></tb>
         <td><input id="edit-start" type="text" class="form-control" value="<%= tb.start %>"</td>
         <td><input id="edit-end" type="text" class="form-control" value="<%= tb.end %>"</td>
-        <td><button id="save-timeblock" data-tb-id="<%= tb.id %>">Save Update</button></td>
+        <td><button data-tb-id="<%= tb.id %>" class="btn btn-info save-timeblock">Save Update</button></td>
       </tr>
     <% end %>
   </tbody>

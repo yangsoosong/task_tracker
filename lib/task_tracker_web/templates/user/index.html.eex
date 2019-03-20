@@ -1,5 +1,9 @@
 <h1>List of Users</h1>
-<p>This is the list of users that can be assigned to a task. Use the edit button to change the Name of the User. If you would like to add a new User you may use the button at the bottom of the table. You may also use the New Task button at the bottom to add a new task which can be assigned to any of these users.</p>
+<p>
+This is the list of users. You can use the edit button to change the user name.<br>
+You can also add a new user with the button at the bottom of the table. <br>
+New Task button at the bottom can add task which could assign to users.
+</p>
 <table class="table table-striped">
   <thead class='topRow'>
     <tr>
@@ -15,12 +19,12 @@
        <td><%= TaskTracker.Users.get_user(user.manager_id).name %></td>
       <td>
         <%= link "Edit", to: Routes.user_path(@conn, :edit, user),
-            class: "btn btn-info" %>
+            class: "btn btn-light" %>
         <%= link "Show", to: Routes.user_path(@conn, :show, user),
-            class: "btn btn-outline-info" %>
+            class: "btn btn-dark" %>
         <%= link "Delete", to: Routes.user_path(@conn, :delete, user),
-            method: :delete, data: [confirm: "Are you sure?"],
-            class: "btn btn-danger" %>
+            method: :delete, data: [confirm: "Proceed with Delete?"],
+            class: "btn btn-warning" %>
       </td>
     </tr>
 <% end %>

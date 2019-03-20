@@ -1,18 +1,18 @@
 defmodule TaskTrackerWeb.ChangesetView do
   use TaskTrackerWeb, :view
+ alias TaskTrackerWeb.TimeblockView
 
-  @doc """
-  Traverses and translates changeset errors.
-  See `Ecto.Changeset.traverse_errors/2` and
-  `TaskTrackerWeb.ErrorHelpers.translate_error/1` for more details.
-  """
-  def translate_errors(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, &translate_error/1)
+  def render("index.json", %{timeblocks: timeblocks}) do
+    %{data: render_many(timeblocks, TimeblockView, "timeblock.json")}
   end
 
-  def render("error.json", %{changeset: changeset}) do
-    # When encoded, the changeset returns its errors
-    # as a JSON object. So we just pass it forward.
-    %{errors: translate_errors(changeset)}
+  def render("show.json", %{timeblock: timeblock}) do
+    %{data: render_one(timeblock, TimeblockView, "timeblock.json")}
+  end
+
+  def render("timeblock.json", %{timeblock: timeblock}) do
+    %{id: timeblock.id,
+	start: timeblock.start,
+	end: timeblock.end}
   end
 end

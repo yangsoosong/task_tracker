@@ -5,8 +5,8 @@
     <tr>
       <th>Name</th>
       <th>Desc</th>
-      <th>Time</th>
-      <th>Complete</th>
+      <th>Completed
+      <th>User Assigned</th>
 
       <th></th>
     </tr>
@@ -35,13 +35,12 @@
   </tbody>
 </table>
 
-<h3>Your  Tasks</h3>
+<h3>Your underlings tasks</h3>
 <table class="table table-striped">
   <thead class='topRow'>
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Time Taken</th>
       <th>Completed</th>
       <th>User Assigned</th>
 
@@ -53,8 +52,8 @@
     <tr>
       <td><%= task.name %></td>
       <td><%= task.desc %></td>
-      <td><%= task.time %></td>
       <td><%= task.complete %></td>
+      <td><%= TaskTracker.Users.get_user(task.user_id).name %></td>
 
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task) %>

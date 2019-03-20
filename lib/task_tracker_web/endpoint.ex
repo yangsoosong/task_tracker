@@ -40,7 +40,7 @@ defmodule TaskTrackerWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_task_tracker_key",
-    signing_salt: "ws8XA8/M"
+    signing_salt: "bou6bx2n"
 
   plug TaskTrackerWeb.Router
 end
